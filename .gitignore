@@ -1,0 +1,10 @@
+node_modules/
+*.tgz
+.env
+.env.*
+!.env.example
+.DS_Store
+coverage/
+
+# Local planning notes
+projectPlan.md

@@ -1,0 +1,51 @@
+{
+  "name": "dev-doctor",
+  "version": "0.1.0",
+  "description": "Diagnose and safely fix common local development environment problems in JavaScript and Node.js projects: ports, Node version, dependencies, .env files and local services.",
+  "type": "module",
+  "bin": {
+    "dev-doctor": "bin/dev-doctor.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "start": "node bin/dev-doctor.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "cli",
+    "doctor",
+    "diagnostics",
+    "developer-tools",
+    "port",
+    "kill-port",
+    "env",
+    "dotenv",
+    "node-version",
+    "docker"
+  ],
+  "author": "sameera_mhk",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sameera_mhk/dev-doctor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sameera_mhk/dev-doctor/issues"
+  },
+  "homepage": "https://github.com/sameera_mhk/dev-doctor#readme",
+  "dependencies": {
+    "@inquirer/prompts": "^7.10.1",
+    "chalk": "^6.0.1",
+    "commander": "^15.0.0",
+    "semver": "^7.8.5"
+  }
+}
