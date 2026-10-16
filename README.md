@@ -1,6 +1,6 @@
 # Dev Doctor
 
-[![CI](https://github.com/sameera_mhk/dev-doctor/actions/workflows/ci.yml/badge.svg)](https://github.com/sameera_mhk/dev-doctor/actions/workflows/ci.yml)
+[![CI](https://github.com/Sameera-MHK/dev-doctor/actions/workflows/ci.yml/badge.svg)](https://github.com/Sameera-MHK/dev-doctor/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Node.js >= 22.12](https://img.shields.io/badge/node-%3E%3D22.12-brightgreen.svg)
 
@@ -32,7 +32,7 @@ Diagnose — and safely fix — the problems that stop a JavaScript or Node.js p
 Requires Node.js 22.12 or newer.
 
 ```bash
-git clone https://github.com/sameera_mhk/dev-doctor.git
+git clone https://github.com/Sameera-MHK/dev-doctor.git
 cd dev-doctor
 npm install
 npm link

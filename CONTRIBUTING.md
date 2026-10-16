@@ -5,7 +5,7 @@ Thanks for helping! Bug reports, fixes and new checks are welcome.
 ## Setup
 
 ```bash
-git clone https://github.com/sameera_mhk/dev-doctor.git
+git clone https://github.com/Sameera-MHK/dev-doctor.git
 cd dev-doctor
 npm install
 npm test

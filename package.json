@@ -36,12 +36,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sameera_mhk/dev-doctor.git"
+    "url": "git+https://github.com/Sameera-MHK/dev-doctor.git"
   },
   "bugs": {
-    "url": "https://github.com/sameera_mhk/dev-doctor/issues"
+    "url": "https://github.com/Sameera-MHK/dev-doctor/issues"
   },
-  "homepage": "https://github.com/sameera_mhk/dev-doctor#readme",
+  "homepage": "https://github.com/Sameera-MHK/dev-doctor#readme",
   "dependencies": {
     "@inquirer/prompts": "^7.10.1",
     "chalk": "^6.0.1",
