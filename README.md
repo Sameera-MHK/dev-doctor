@@ -1,5 +1,6 @@
 # Dev Doctor
 
+[![npm](https://img.shields.io/npm/v/@mhk_sameera/dev-doctor.svg)](https://www.npmjs.com/package/@mhk_sameera/dev-doctor)
 [![CI](https://github.com/Sameera-MHK/dev-doctor/actions/workflows/ci.yml/badge.svg)](https://github.com/Sameera-MHK/dev-doctor/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Node.js >= 22.12](https://img.shields.io/badge/node-%3E%3D22.12-brightgreen.svg)
@@ -11,11 +12,13 @@ Diagnose — and safely fix — the problems that stop a JavaScript or Node.js p
 - **No secrets in output.** `.env` files are compared by key name only; command lines are redacted.
 - **Cross-platform.** macOS, Linux and Windows.
 
-> **Status:** not yet published to npm. The npm name `dev-doctor` belongs to an unrelated package, so do not run `npx dev-doctor` expecting this tool. Use it from source (see [Quick start](#quick-start)) until it is published under a new name.
+```bash
+npx @mhk_sameera/dev-doctor
+```
 
 ## Contents
 
-- [Quick start](#quick-start)
+- [Installation](#installation)
 - [Example](#example)
 - [Commands](#commands)
 - [Configuration](#configuration)
@@ -27,9 +30,31 @@ Diagnose — and safely fix — the problems that stop a JavaScript or Node.js p
 - [Contributing](#contributing)
 - [License](#license)
 
-## Quick start
+## Installation
 
 Requires Node.js 22.12 or newer.
+
+Run it once in any project, without installing:
+
+```bash
+npx @mhk_sameera/dev-doctor
+```
+
+Or install it, then use the `dev-doctor` command:
+
+```bash
+npm install -g @mhk_sameera/dev-doctor
+dev-doctor
+```
+
+As a project dev dependency (for scripts and CI):
+
+```bash
+npm install -D @mhk_sameera/dev-doctor
+npx dev-doctor --ci
+```
+
+From source:
 
 ```bash
 git clone https://github.com/Sameera-MHK/dev-doctor.git
@@ -37,14 +62,6 @@ cd dev-doctor
 npm install
 npm link
 ```
-
-Then, inside any project:
-
-```bash
-dev-doctor
-```
-
-Without `npm link`, run it directly: `node /path/to/dev-doctor/bin/dev-doctor.js --cwd /path/to/project`.
 
 ## Example
 
