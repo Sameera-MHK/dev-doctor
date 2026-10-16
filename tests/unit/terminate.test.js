@@ -49,8 +49,10 @@ test('invalid ports are rejected before anything else happens', async () => {
 test('safety rules refuse self, parent, low PIDs and system processes', () => {
   assert.match(killSafetyReason({ pid: 100, name: 'node' }, { currentPid: 100, parentPid: 1 }), /dev-doctor itself/);
   assert.match(killSafetyReason({ pid: 100, name: 'zsh' }, { currentPid: 1, parentPid: 100 }), /started dev-doctor/);
-  assert.match(killSafetyReason({ pid: 1, name: 'launchd' }), /system process/);
-  assert.match(killSafetyReason({ pid: 900, name: 'svchost.exe' }), /protected/);
+  // Fixed fake PIDs: real ones can collide with test PIDs (Windows uses small PIDs).
+  const fake = { currentPid: 10, parentPid: 11 };
+  assert.match(killSafetyReason({ pid: 1, name: 'launchd' }, fake), /system process/);
+  assert.match(killSafetyReason({ pid: 900, name: 'svchost.exe' }, fake), /protected/);
   assert.equal(killSafetyReason({ pid: 900, name: 'node' }, { currentPid: 1, parentPid: 2 }), null);
 });
 
