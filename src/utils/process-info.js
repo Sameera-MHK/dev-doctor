@@ -26,7 +26,9 @@ export function runCommand(command, args = [], { timeout = 5000, shell = false, 
 /** Get a tool's version, e.g. `npm --version`. Returns null when it is not available. */
 export async function getToolVersion(tool, { run = runCommand, platform = process.platform } = {}) {
   // Package managers are .cmd shims on Windows and need a shell; the arguments are constant.
-  const r = await run(tool, ['--version'], { timeout: 8000, shell: platform === 'win32' });
+  const r = platform === 'win32'
+    ? await run(`${tool} --version`, [], { timeout: 8000, shell: true })
+    : await run(tool, ['--version'], { timeout: 8000 });
   if (!r.ok) return null;
   return r.stdout.trim().split(/\r?\n/)[0] || null;
 }

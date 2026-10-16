@@ -72,6 +72,8 @@ test('win32 adapter resolves names and maps taskkill failures', async () => {
   assert.deepEqual(await adapter.killProcess(55), { ok: false, reason: 'permission' });
   assert.deepEqual(await adapter.killProcess(55, { force: true }), { ok: true });
   await assert.rejects(createWin32Adapter({ run: async () => missing() }).findListeners(3000), /netstat/);
+  const consoleApp = createWin32Adapter({ run: async () => failed('', 'ERROR: The process with PID 55 could not be terminated.\r\nReason: This process can only be terminated forcefully (with /F option).') });
+  assert.deepEqual(await consoleApp.killProcess(55), { ok: false, reason: 'graceful-unsupported' });
 });
 
 test('killUnix sends SIGTERM by default and maps errors', () => {

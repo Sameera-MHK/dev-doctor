@@ -263,6 +263,7 @@ The test suite has been run locally on macOS. Linux and Windows support is cover
 - Service checks are TCP-only and use default ports unless configured; ports remapped in Compose files are not parsed.
 - On macOS, `lsof` only shows your own processes without elevated permissions; other users' processes appear as "process details not accessible", and their working directory as unavailable.
 - Working directories are not available on Windows, so project association there relies on the command line.
+- On Windows, console programs such as `node.exe` cannot be stopped gracefully (`taskkill` without `/F` is refused), so stopping them always needs the separate force step (`--force` or a second confirmation).
 - Command-line redaction is pattern-based; unusual secret formats may not be recognized.
 - `.nvmrc` aliases such as `lts/*` cannot be verified offline.
 

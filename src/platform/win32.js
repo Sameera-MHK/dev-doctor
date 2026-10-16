@@ -87,6 +87,8 @@ export function createWin32Adapter({ run = runCommand } = {}) {
       if (r.missing) return { ok: false, reason: 'error', message: 'taskkill not found' };
       const text = `${r.stdout} ${r.stderr}`;
       if (/access is denied/i.test(text)) return { ok: false, reason: 'permission' };
+      // Console programs (node.exe, python.exe, ...) have no window to close, so taskkill without /F cannot stop them.
+      if (!force && /forcefully|\/F option/i.test(text)) return { ok: false, reason: 'graceful-unsupported' };
       if (/not found/i.test(text)) return { ok: false, reason: 'not-found' };
       return { ok: false, reason: 'error', message: text.trim() };
     },

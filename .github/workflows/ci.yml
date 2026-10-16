@@ -18,13 +18,17 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         node: [22.x, 24.x]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
           cache: npm
       - run: npm ci
-      - run: npm test
+      - run: npm test -- --test-reporter=spec --test-reporter-destination=stdout --test-reporter=tap --test-reporter-destination=test-results.tap
+      - name: Report failing tests as annotations
+        if: failure()
+        shell: bash
+        run: node -e "for (const l of require('fs').readFileSync('test-results.tap', 'utf8').split('\n')) if (/^\s*not ok/.test(l)) console.log('::error::' + l.trim())"
       - name: Smoke test (exit 1 = findings are fine, exit 2 = crash)
         run: |
           node bin/dev-doctor.js --version

@@ -114,17 +114,22 @@ export async function terminatePortProcess(portValue, options) {
   if (!graceful.ok && graceful.reason === 'permission') {
     return done('failed', `Permission denied stopping ${label}. dev-doctor does not use sudo; stop it yourself if appropriate.`);
   }
-  if (!graceful.ok && graceful.reason !== 'not-found') return done('failed', `Could not stop ${label}: ${graceful.message ?? graceful.reason}`);
+  // On Windows, console processes cannot be asked to stop gracefully; they are still running and go to the force step.
+  const noGraceful = !graceful.ok && graceful.reason === 'graceful-unsupported';
+  if (!graceful.ok && !noGraceful && graceful.reason !== 'not-found') return done('failed', `Could not stop ${label}: ${graceful.message ?? graceful.reason}`);
 
-  await waitAfterSignal(port, target.pid, deps, waitMs);
-  const afterGraceful = await verify(graceful.ok ? 'Stopped' : 'Process had already exited:');
-  if (afterGraceful) return afterGraceful;
+  if (!noGraceful) {
+    await waitAfterSignal(port, target.pid, deps, waitMs);
+    const afterGraceful = await verify(graceful.ok ? 'Stopped' : 'Process had already exited:');
+    if (afterGraceful) return afterGraceful;
+  }
 
   // Same PID is still running and still holds the port: force only as an explicit, separate action.
+  const situation = noGraceful ? 'cannot be stopped gracefully (console process on Windows)' : 'is still running after a graceful stop request';
   let allowForce = force;
-  if (!allowForce && interactive) allowForce = await confirm(`${label} is still running after a graceful stop request. Force terminate it?`);
+  if (!allowForce && interactive) allowForce = await confirm(`${label} ${situation}. Force terminate it?`);
   if (!allowForce) {
-    return done('failed', `${label} is still running after a graceful stop request; port ${port} is still in use. Re-run with --force to force terminate it.`);
+    return done('failed', `${label} ${situation}; port ${port} is still in use. Re-run with --force to force terminate it.`);
   }
 
   const forced = await adapter.killProcess(target.pid, { force: true });

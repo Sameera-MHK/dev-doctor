@@ -120,6 +120,21 @@ test('explicit force termination (--force or a second confirmation)', async () =
   assert.equal((await terminatePortProcess(3000, { ...base, ...sys2, interactive: true, confirm: async () => true })).status, 'released');
 });
 
+test('Windows console process: graceful stop unsupported, force stays a separate explicit step', async () => {
+  const sys = fakeSystem([node()]);
+  const realKill = sys.adapter.killProcess;
+  sys.adapter.killProcess = async (pid, opts) => (opts.force ? realKill(pid, opts) : (sys.kills.push({ pid, force: false }), { ok: false, reason: 'graceful-unsupported' }));
+  const r = await terminatePortProcess(3000, { ...base, ...sys, interactive: false, yes: true });
+  assert.equal(r.status, 'failed');
+  assert.match(r.message, /cannot be stopped gracefully.*--force/);
+  assert.deepEqual(sys.kills, [{ pid: 4242, force: false }]);
+
+  const sys2 = fakeSystem([node()]);
+  const realKill2 = sys2.adapter.killProcess;
+  sys2.adapter.killProcess = async (pid, opts) => (opts.force ? realKill2(pid, opts) : { ok: false, reason: 'graceful-unsupported' });
+  assert.equal((await terminatePortProcess(3000, { ...base, ...sys2, interactive: false, yes: true, force: true })).status, 'released');
+});
+
 test('process exits before termination (while the user is confirming)', async () => {
   const sys = fakeSystem([node()]);
   const confirm = async () => { sys.model.get(4242).running = false; return true; };
