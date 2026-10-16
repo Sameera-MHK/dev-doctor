@@ -1,6 +1,6 @@
 # Dev Doctor
 
-[![npm](https://img.shields.io/npm/v/@mhk_sameera/dev-doctor.svg)](https://www.npmjs.com/package/@mhk_sameera/dev-doctor)
+[![npm](https://img.shields.io/npm/v/dev-env-doctor.svg)](https://www.npmjs.com/package/dev-env-doctor)
 [![CI](https://github.com/Sameera-MHK/dev-doctor/actions/workflows/ci.yml/badge.svg)](https://github.com/Sameera-MHK/dev-doctor/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Node.js >= 22.12](https://img.shields.io/badge/node-%3E%3D22.12-brightgreen.svg)
@@ -13,7 +13,7 @@ Diagnose — and safely fix — the problems that stop a JavaScript or Node.js p
 - **Cross-platform.** macOS, Linux and Windows.
 
 ```bash
-npx @mhk_sameera/dev-doctor
+npx dev-env-doctor
 ```
 
 ## Contents
@@ -37,20 +37,20 @@ Requires Node.js 22.12 or newer.
 Run it once in any project, without installing:
 
 ```bash
-npx @mhk_sameera/dev-doctor
+npx dev-env-doctor
 ```
 
 Or install it, then use the `dev-doctor` command:
 
 ```bash
-npm install -g @mhk_sameera/dev-doctor
+npm install -g dev-env-doctor
 dev-doctor
 ```
 
 As a project dev dependency (for scripts and CI):
 
 ```bash
-npm install -D @mhk_sameera/dev-doctor
+npm install -D dev-env-doctor
 npx dev-doctor --ci
 ```
 

@@ -1,5 +1,5 @@
 {
-  "name": "@mhk_sameera/dev-doctor",
+  "name": "dev-env-doctor",
   "version": "0.1.0",
   "description": "Diagnose and safely fix common local development environment problems in JavaScript and Node.js projects: ports, Node version, dependencies, .env files and local services.",
   "type": "module",
