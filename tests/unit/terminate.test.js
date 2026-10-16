@@ -229,8 +229,13 @@ test('stops a controlled child process and verifies the port is released', async
     const s = require('net').createServer().listen(0, '127.0.0.1', () => console.log(s.address().port));
   `], { stdio: ['ignore', 'pipe', 'inherit'] });
   try {
-    const [data] = await once(child.stdout, 'data');
-    const port = Number(String(data).trim());
+    // Output can arrive in several chunks; wait for a complete line holding the port number.
+    let output = '';
+    while (!/^\d+\r?\n/m.test(output)) {
+      const [chunk] = await once(child.stdout, 'data');
+      output += chunk;
+    }
+    const port = Number(/^(\d+)\r?\n/m.exec(output)[1]);
     const r = await terminatePortProcess(port, { ...base, adapter: getPlatformAdapter(), safety: undefined, pid: child.pid, interactive: false, yes: true, force: true, waitMs: 5000 });
     // If the OS tools cannot see the owner, dev-doctor must refuse rather than guess.
     assert.ok(['released', 'refused'].includes(r.status), r.message);
