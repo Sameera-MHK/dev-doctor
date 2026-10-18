@@ -40,12 +40,14 @@ Run it once in any project, without installing:
 npx dev-env-doctor
 ```
 
-Or install it, then use the `dev-doctor` command:
+Or install it globally, then use the command from any folder:
 
 ```bash
 npm install -g dev-env-doctor
 dev-doctor
 ```
+
+The command is available under two names, `dev-doctor` and `dev-env-doctor`; they are identical. The examples below use the shorter one.
 
 As a project dev dependency (for scripts and CI):
 
@@ -53,6 +55,8 @@ As a project dev dependency (for scripts and CI):
 npm install -D dev-env-doctor
 npx dev-doctor --ci
 ```
+
+> **`command not found: dev-doctor`?** A project install (`npm install dev-env-doctor` without `-g`) does not put the command on your PATH. Inside that project, run `npx dev-doctor`; anywhere else, use `npx dev-env-doctor` or install with `-g`.
 
 From source:
 

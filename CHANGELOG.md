@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-10-18
+
+### Added
+
+- `dev-env-doctor` command name, matching the npm package name. `dev-doctor` keeps working.
+
+### Changed
+
+- README: installation section explains both command names and the "command not found" case for project installs.
+
 ## [0.1.0] - 2026-10-16
 
 ### Added

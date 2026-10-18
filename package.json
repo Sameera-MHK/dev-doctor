@@ -1,10 +1,11 @@
 {
   "name": "dev-env-doctor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Diagnose and safely fix common local development environment problems in JavaScript and Node.js projects: ports, Node version, dependencies, .env files and local services.",
   "type": "module",
   "bin": {
-    "dev-doctor": "bin/dev-doctor.js"
+    "dev-doctor": "bin/dev-doctor.js",
+    "dev-env-doctor": "bin/dev-doctor.js"
   },
   "files": [
     "bin",
